@@ -50,10 +50,10 @@ func (l *responseLogger) WriteHeader(s int) {
 
 func printLog(req *http.Request, status int, size int, d time.Duration) {
 	host, _, _ := net.SplitHostPort(req.RemoteAddr)
-	requestTime := d.Nanoseconds() / 1e6
+	requestTime := float64(d.Nanoseconds()) / 1e6
 	// ip method path status size time
 	// 0.0.0.0 GET /api/users 200 312 34
-	log.Printf("%s %s %s %d %d %d\n",
+	log.Printf("%s %s %s %d %d %.2f\n",
 		host,
 		req.Method,
 		req.URL.RequestURI(),
